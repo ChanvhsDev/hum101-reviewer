@@ -1,96 +1,79 @@
-// CONTENT LAYER — all study material lives here. Edit/replace this file to update the reviewer.
+// CONTENT LAYER — Marine Environment, Semi-Final Week 1 (MARPOL Annex IV – Sewage)
+// Replace src/data/content.ts with this file. Nothing else in the UI needs to change.
 export interface Card{id:string;topic:string;term:string;front:string;back:string;alt?:string[];opts?:string[];only?:'mc';why?:string}
 export interface Topic{id:string;subject:string;title:string;intro:string;remember:string;level:string;note?:string}
 
 export const topics:Topic[]=[
-{id:'periods',subject:'Art History',title:'Art Periods & Landmark Works',level:'Medium',
- intro:'Match famous works, artists and features to the period of art history they belong to.',
- remember:'Memorize the pairs: Parthenon → Greek, Pantheon → Roman, Hagia Sophia → Byzantine, Pointed Arches → Gothic, Thick Walls & Massive Structures → Romanesque, Catacombs → Early Christian (about 200–500 A.D.).',
- note:'Your source lists “St. Therese in Ecstasy” under Roman Art. It is kept as written, but it is often classed as Baroque — worth confirming with your instructor.'},
-{id:'classical',subject:'Music',title:'The Classical Period in Music',level:'Medium',
- intro:'The era of music from 1750 to 1820 — its context, style, composers and forms.',
- remember:'Sonata form has three parts in order: Exposition → Development → Recapitulation. The Classical orchestra has four sections: strings, woodwind, brass, percussion.'},
-{id:'movements',subject:'Art Movements',title:'Classical Art to Pop Art',level:'Medium',
- intro:'Major movements from Classical Art through Baroque, Romanticism, Cubism and Pop Art, with key figures.',
- remember:'Realism rejected Romanticism; Impressionism = visible brush strokes; Expressionism = emotion of color; Cubism = Picasso & Braque; Pop Art = Andy Warhol.'},
-{id:'more',subject:'Art Movements',title:'More Art Movements',level:'Easy',
- intro:'Ukiyo-e, Mannerism, Dadaism, Minimalism, Optical Art, Conceptual Art, Fauvism, Body Art, Earth/Land Art and Abstract Art.',
- remember:'Dadaism formed in Zurich during WWI; Fauvism ran about 1905–1910 (Matisse, Derain); Conceptual Art: the idea matters more than the object.'},
-{id:'planes',subject:'Art Analysis',title:'Planes of Art Analysis',level:'Easy',
- intro:'Three planes used to analyze a work of art.',
- remember:'Iconic = subjects & presentation. Semiotic = elements, medium, technique, physical properties. Contextual = social & historical context.'}]
-
-const periods:Record<string,string[]>={
-'Indian Art':['Taj Mahal','Kaavya Literary Art','Rangoli','Petroglyphs'],
-'Renaissance Art':['Michelangelo Buonarroti','Golden Age of Arts',"St. Peter's Basilica",'Vitruvian Man'],
-'Romanesque Art':['Gloucester Candlestick','Thick Walls and Massive Structures'],
-'Prehistoric Art':['Olmec Heads','Stonehenge','Cave Paintings'],
-'Egyptian Art':['Great Sphinx','Pyramid of Giza'],
-'Greek Art':['Parthenon','Discus Thrower','Laocoön and His Sons'],
-'Roman Art':['Pantheon','St. Therese in Ecstasy'],
-'Byzantine Art':['Hagia Sophia'],
-'Modern Art':['Abstraction','Al-Burj Dubai'],
-'Baroque Art':['Rembrandt van Rijn'],
-'Gothic Art':['Pointed Arches'],
-'Chinese Art':['Porcelain Vases','Calligraphy','Terracotta Army'],
-'Early Christian Art':['Tomb Paintings and Catacombs','Period about 200–500 A.D.']}
-let n=0
-const periodCards:Card[]=Object.entries(periods).flatMap(([p,ws])=>ws.map(w=>({id:'per'+n++,topic:'periods',term:w,
- front:/^Period/.test(w)?`Which period of art history covers the “${w.toLowerCase()}”?`:`Which period of art history is “${w}” associated with?`,back:p,why:`“${w}” is listed under ${p}.`})))
+{id:'overview',subject:'MARPOL Annex IV',title:'Overview: Purpose & Applicability',level:'Easy',
+ intro:'What Annex IV is, why it exists, which ships it covers, and the certificate that proves compliance.',
+ remember:'Annex IV = sewage. Covers ships of 400 GT and above, or under 400 GT certified for more than 15 persons, on international voyages. Proof of compliance: the ISPPC.'},
+{id:'defs',subject:'MARPOL Annex IV',title:'Regulation 1: Definitions',level:'Medium',
+ intro:'Key terms: sewage, new and existing ship, holding tank, nearest land, international voyage, person and anniversary date.',
+ remember:'Sewage = toilets and urinals + medical premises + spaces with living animals + other wastewater mixed with these. A new ship is delivered 3 years or more after entry into force (or contracted/keel-laid on or after it).',
+ note:'Your slides name the “Director of Marine” as the approving authority (the Administration). Use that wording for your exam.'},
+{id:'apply',subject:'MARPOL Annex IV',title:'Regulations 2 & 3: Application & Exemptions',level:'Medium',
+ intro:'Which new and existing ships must comply, the 1983 keel-laying provision, and the two exemptions.',
+ remember:'Existing ships: Annex IV applies five years after entry into force. Exemptions: safety of ship / saving life at sea, and damage to the ship or equipment (with all reasonable precautions taken).'},
+{id:'discharge',subject:'MARPOL Annex IV',title:'Discharge Distances & Conditions',level:'Medium',
+ intro:'What may be discharged at 0–3 nm, 3–12 nm and beyond 12 nm from the nearest land.',
+ remember:'0–3 nm: only effluent from an approved STP. 3–12 nm: comminuted AND disinfected. Beyond 12 nm: untreated allowed, but ship en route, at least 4 knots, at an approved discharge rate.'},
+{id:'systems',subject:'MARPOL Annex IV',title:'Regulation 9: Sewage Systems & Components',level:'Hard',
+ intro:'The three approved systems and how each one works, with the parts of a sewage treatment plant and a comminuting system.',
+ remember:'A ship needs ONE of three: approved STP, comminuting and disinfecting system (with temporary storage for within 3 nm), or holding tank (with a visual content indicator).'}]
 
 const clue=(topic:string,rows:[string,string][]):Card[]=>rows.map(([back,front],i)=>({id:topic+i,topic,term:back,front,back}))
 
-const classical=clue('classical',[
-['Age of Enlightenment','The Classical era is also called the “____________”.'],
-['Classical Period','Generally refers to the post-Baroque and pre-Romantic era of music composed between 1750 and 1820, covering the development of the classical symphony and concerto.'],
-['Aristocracy','Cultural life was dominated by the __________, as patrons of musicians and artists who generally influenced the arts.'],
-['Alberti Bass','The style of broken-chord accompaniment named after Domenico Alberti.'],
-['Melody','Short, clearly defined musical phrases with two or more contrasting themes.'],
-['Rhythm','In Classical music it is very defined and regular.'],
-['Orchestra','The symphony ________ was organized into four sections: strings, woodwind, brass and percussion.'],
-['Franz Joseph Haydn','One of the most prominent composers of the Classical period, known for his “rag-to-riches” story.'],
-['Wolfgang Amadeus Mozart','A child prodigy and “the most amazing genius in musical history” who, due to mismanaged finances, lived in poverty, died young and was buried in an unknown grave.'],
-['Ludwig van Beethoven','The composer who bridged the late Classical era and the early Romantic era.'],
-['Sonata','A multi-movement work for a solo instrument (e.g., keyboard or violin); its name comes from the word “sonare”, to make a sound.'],
-['Exposition','The first part of a composition in sonata form; it introduces the theme.'],
-['Development','The middle part of the sonata-allegro form, wherein themes are developed.'],
-['Recapitulation','The part of sonata form that repeats the themes as they first emerged in the opening exposition.'],
-['Concerto','A multi-movement work designed for an instrumental soloist and orchestra.'],
-['Sinfonia','A symphony is a multi-movement work for orchestra; the word comes from the term “__________”, literally “a harmonious sounding together”.'],
-['Opera','A drama set to music where singers and musicians perform in a theatrical setting.']])
-classical.push({id:'classicalEv',topic:'classical',term:'EDSA 1',front:'Which is NOT an important historical event of the Classical period?',back:'EDSA 1',opts:['French Revolution','Napoleonic Wars','American Revolution'],only:'mc',why:'The French Revolution, Napoleonic Wars and American Revolution fall in the Classical period; EDSA 1 does not.'})
+const overview=clue('overview',[
+['MARPOL Annex IV','The part of MARPOL that controls and prevents pollution by sewage from ships.'],
+['International Maritime Organization','The body (IMO) whose regulation controls and prevents pollution by sewage from ships.'],
+['Untreated sewage','Annex IV protects marine and coastal environments from the harmful effects of discharging ________.'],
+['400 gross tonnage','Annex IV applies to ships of ________ (GT) and above engaged in international voyages.'],
+['15 persons','Ships under 400 GT are covered by Annex IV if certified to carry more than ________.'],
+['International Sewage Pollution Prevention Certificate','The certificate, abbreviated ISPPC, that compliant ships engaged in international trade must hold.']])
 
-const movements=clue('movements',[
-['Greeks','Classical Art dates back to as early as 500 BC, developed by the ________.'],
-['Roman','Most of the Classical Art that has survived today is ________, not Greek.'],
-['Leonardo da Vinci','He was called the archetypal “Renaissance Man”.'],
-['Baroque Art','Characterized by rich color, Christian themes, intense shadowing, and highly dramatic, heavily foreshortened scenes.'],
-['Rococo','An art much different from Baroque: ornate and playful, often used by nobles to display their wealth.'],
-['Romanticism','The ____________ movement originated as a revolt against the Age of Enlightenment and the Scientific Revolution.'],
-['Realism','____________ began as a rejection of the imagination and subjectivism of Romanticism, focusing on accurate observation of the ordinary world.'],
-['Impressionism','____________ is characterized by small but visible brush strokes, open composition and real-life subject matter.'],
-['Expressionism','____________ focused on the emotion of color rather than its reality, and often appeared abstract.'],
-['Cubism','Rejecting naturalistic depiction of prior movements, its artists preferred compositions of shapes and forms used in an abstract way.'],
-['Pablo Picasso','Along with Georges Braque, often considered a creator of Cubism.'],
-['Surrealism','Western art dominated by dark themes such as uncertainty and anxiety.'],
-['Pop Art','Art focused on subjects not normally considered art (advertisements, pop culture, consumerism); easily accessible to the average person.'],
-['Andy Warhol','A leading figure in the Pop Art movement.']])
+const defs=clue('defs',[
+['Sewage','Drainage and wastes from toilets and urinals, from medical premises, and from spaces containing living animals, plus other wastewater mixed with these.'],
+['New ship','A ship whose building contract was placed (or keel laid) on or after the Annex’s entry into force, or which is delivered three years or more after that date.'],
+['Existing ship','Any ship that is not a new ship.'],
+['Holding tank','A tank used for the collection and storage of sewage.'],
+['Nearest land','“From the ________” means from the baseline from which the territorial sea is established in accordance with international law.'],
+['International voyage','A voyage from a country to which the Convention applies to a port outside that country, or conversely.'],
+['Person','A member of the crew or a passenger.'],
+['Anniversary date','The day and month each year that corresponds to the expiry date of the International Sewage Pollution Prevention Certificate.'],
+['North Eastern Coast of Australia','The area with a special “nearest land” line defined by 12 coordinate points, from 11°00′ S, 142°08′ E down to 24°42′ S, 153°15′ E.']])
 
-const more=clue('more',[
-['Ukiyo-e','A style of Japanese woodblock print and painting from the Edo period depicting theater actors, beautiful courtesans, city life, travel in romantic landscapes, and erotic scenes.'],
-['Mannerism','From the Italian “maniera” (“style”); sometimes called the “stylish style” for its emphasis on self-conscious artifice over realistic depiction.'],
-['Dadaism','An art movement formed during the First World War in Zurich as a negative reaction to the horrors and folly of the war.'],
-['Minimalism','Art that extends the abstract idea that art should have its own reality and not be an imitation of something else.'],
-['Optical Art','A style of visual art that uses optical illusions; works are abstract, and many well-known pieces are black and white.'],
-['Conceptual Art','Art in which the idea behind the work matters more than the finished object; emerged in the 1960s (mid-1960s to mid-1970s).'],
-['Fauvism','Work by a group of artists (including Henri Matisse and André Derain) from around 1905 to 1910, characterized by strong colours and fierce brushwork.'],
-['Body Art','Art made on, with, or consisting of the human body; most common forms are tattoos and body piercings.'],
-['Earth and Land Art','Art made directly in the landscape, sculpting the land into earthworks or building structures from natural materials such as rocks or twigs.'],
-['Abstract Art','Art that does not attempt an accurate depiction of visual reality, using shapes, colours, forms and gestural marks instead.']])
+const apply=clue('apply',[
+['Five years','Existing ships fall under Annex IV this long after the date of entry into force.'],
+['2 October 1983','Existing ships whose keels were laid before this date must be equipped, as far as practicable, to discharge sewage per Regulation 11.'],
+['Regulation 3','The regulation that lists exemptions from the sewage discharge requirements.'],
+['Saving life at sea','Discharge is exempt when necessary to secure the safety of the ship and those on board, or for ________.'],
+['Damage to the ship or its equipment','Discharge resulting from ________ is exempt if all reasonable precautions were taken before and after to prevent or minimize it.'],
+['Regulation 2','The regulation on application: which new and existing ships on international voyages must comply.']])
 
-const planes=clue('planes',[
-['Iconic Plane','The ____________ includes the choice of subjects, presentation of the image in relation to the viewer, positioning of figures and the significations that arise from these.'],
-['Semiotic Plane','The basic ____________ covers the elements and the general technical and physical aspects of the work: visual elements, medium and technique, format and other physical properties.'],
-['Contextual Plane','The social and historical context of the work; it resituates the work in its context and brings out its full human and social meaning.']])
+const discharge=clue('discharge',[
+['Prohibited','Discharging raw sewage within 3 nautical miles is ________ unless it has been processed through an approved sewage treatment plant.'],
+['Approved sewage treatment plant','Within 3 nm, only sewage that has been processed through an ________ may be discharged.'],
+['Between 3 and 12 nautical miles','Comminuted and disinfected sewage may be discharged only within this distance range from the nearest land.'],
+['Comminuted and disinfected','Between 3 and 12 nm, sewage may be discharged only if it has been ________ using an approved system.'],
+['Beyond 12 nautical miles','Untreated sewage may be discharged only at this distance from the nearest land.'],
+['En route','When discharging untreated sewage beyond 12 nm, the ship must be ________ (underway).'],
+['4 knots','When discharging untreated sewage beyond 12 nm, the ship’s speed must be at least ________.'],
+['Approved discharge rate','Untreated sewage beyond 12 nm must be released following the ________.']])
 
-export const cards:Card[]=[...periodCards,...classical,...movements,...more,...planes]
+const systems=clue('systems',[
+['Three','A ship must be equipped with one of ________ approved sewage systems.'],
+['Director of Marine','The authority that approves the type of sewage treatment plant and the comminuting system, and the holding tank capacity.'],
+['Sewage treatment plant','The system whose type must be approved taking into account standards and test methods developed by the Organization.'],
+['Comminuting and disinfecting system','The system that must have facilities for temporary storage of sewage when the ship is less than 3 nm from the nearest land.'],
+['Holding tank','The system with capacity for retention of all sewage and a means to indicate visually the amount of its contents.'],
+['Screen filter','The part of the STP that catches large debris coming in from the inlets.'],
+['Grey water','Drainage from sinks and showers, which enters the STP through its own inlet, separate from black water.'],
+['Aeration chamber','The STP section where blowers supply oxygen to aerobic bacteria that digest the waste.'],
+['Settlement chamber','The STP section where digested sludge settles; sludge is sent back through the sludge return line.'],
+['Chlorinator','The STP equipment that disinfects the effluent in the chlorination and collection chamber before it goes overboard.'],
+['High-level and low-level floats','The HL and LL float switches that control the automatic start and stop of the overboard discharge pump.'],
+['Grinder pump','The comminuting system pump that pulverizes solid waste into fine particles.'],
+['Sludge retention tank','The comminuting system tank that retains concentrated solids when discharge is not permitted.']])
+systems.push({id:'systemsNot',topic:'systems',term:'Oily water separator',front:'Which of these is NOT one of the three sewage systems allowed under Regulation 9?',back:'Oily water separator',opts:['Sewage treatment plant','Comminuting and disinfecting system','Holding tank'],only:'mc',why:'Regulation 9 allows only a sewage treatment plant, a comminuting and disinfecting system, or a holding tank. An oily water separator is not one of them.'})
+
+export const cards:Card[]=[...overview,...defs,...apply,...discharge,...systems]
